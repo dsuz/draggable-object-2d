@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// GameObject をドラッグ・タッチで動かす機能を持つ。
-/// ドラッグまたはタッチによって動かしたい GameObject に追加して使う。
+/// GameObject をドラッグで動かす機能を持つ。
+/// ドラッグによって動かしたい GameObject に追加して使う。
 /// 2D でのみ使用可能。
+/// タッチ非対応。タッチに対応させたい場合は、このクラスを GameObject に追加した上で DragManager2D を併用する。
 /// </summary>
 [RequireComponent(typeof(Collider2D))]
 public class DraggableObject2D : MonoBehaviour
@@ -33,7 +34,7 @@ public class DraggableObject2D : MonoBehaviour
     void OnMouseDrag()
     {
         // マウス使用時、及びシングルタッチの時の処理
-        if (!Input.touchSupported && m_isDragging)
+        if (!Input.touchSupported)
         {
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
             this.transform.position = worldPoint;
